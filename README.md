@@ -1,5 +1,3 @@
-Hier ist ein Vorschlag für dein README:
-
 ```markdown
 # Kubernetes Dokumentation
 
@@ -8,8 +6,7 @@ Hier ist ein Vorschlag für dein README:
 - **Minikube**: Wird verwendet, um das Kubernetes-Cluster zu starten oder zu löschen.
 - **Kubectl**: Wird verwendet, um das Cluster zu konfigurieren und zu verwalten.
 
-### Hinweise für Linux Debian:
-Falls Minikube auf deinem Linux Debian nicht funktioniert, führe folgende Schritte aus:
+### Weil es auf meinem Linux Debian zuerst nicht funktionierte:
 ```bash
 sudo systemctl stop apparmor   # Stoppt AppArmor (anti-virus)
 minikube delete --all          # Löscht alle Minikube-Cluster
