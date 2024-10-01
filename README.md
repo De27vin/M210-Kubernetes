@@ -1,42 +1,98 @@
-Minikube ist nur um das Cluster zu starten oder löschen.
-Kubectl ist um das Cluster zu konfigurieren.
+Hier ist ein Vorschlag für dein README:
 
+```markdown
+# Kubernetes Dokumentation
 
-Weil es auf meinem Linux Debian nicht funktioniert hat:
-sudo systemctl stop apparmor → Stoppt anti-virus
-minikube delete --all
+## Minikube und Kubectl
+
+- **Minikube**: Wird verwendet, um das Kubernetes-Cluster zu starten oder zu löschen.
+- **Kubectl**: Wird verwendet, um das Cluster zu konfigurieren und zu verwalten.
+
+### Hinweise für Linux Debian:
+Falls Minikube auf deinem Linux Debian nicht funktioniert, führe folgende Schritte aus:
+```bash
+sudo systemctl stop apparmor   # Stoppt AppArmor (anti-virus)
+minikube delete --all          # Löscht alle Minikube-Cluster
+minikube start --driver=docker --force  # Startet Minikube mit Docker als Treiber
+```
+
+### Minikube starten:
+```bash
 minikube start --driver=docker --force
+```
 
+### Nodes anzeigen:
+- Zeigt alle Nodes im Cluster an:
+  ```bash
+  kubectl get node
+  ```
 
-Minikube starten:
-minikube start --driver=docker --force
+- Zeigt zusätzliche Informationen wie die IP-Adressen der Nodes:
+  ```bash
+  kubectl get node -o wide
+  ```
 
+### Pods anzeigen:
+- Zeigt alle laufenden Pods im Cluster an:
+  ```bash
+  kubectl get pod
+  ```
 
-Zeigt alle nodes an:
-kubectl get node
-kubectl node -o wide → Gibt IP-Adresse von nodes
-Zeigt alle Pods an:
-kubectl get pod
+### Konfigurationsdateien anwenden:
+- Um Ressourcen aus einer Kubernetes-Konfigurationsdatei zu erstellen:
+  ```bash
+  kubectl apply -f {Dateiname}  # z.B. mongo-config.yaml
+  ```
 
+### Erstellte Komponenten überprüfen:
+- Alle erstellten Ressourcen anzeigen:
+  ```bash
+  kubectl get all
+  ```
 
-Kubernetes File als Input um was auch immer im File ist zu erstellen:
-kubectl apply -f {Filename} (z.B. mongo-config.yaml)
+- Nur ConfigMaps anzeigen:
+  ```bash
+  kubectl get configmap
+  ```
 
+- Nur Secrets anzeigen:
+  ```bash
+  kubectl get secret
+  ```
 
-Erstellte Components überprüfen:
-kubectl get all → Alle überprüfen
-kubectl get configmap → Nur configMap überprüfen
-kubectl get secret → Nur secret überprüfen
+### App im Browser öffnen:
+- Zeigt alle laufenden Services im Cluster:
+  ```bash
+  kubectl get svc
+  ```
 
+- Ermittelt die Minikube-IP:
+  ```bash
+  minikube ip
+  ```
 
-App auf Browser öffnen:
-kubectl get svc → Gibt einem alle laufenden Services zurück
-minikube ip → IP:nodePort (in webapp.yaml file)
+- Die App kann mit IP:nodePort im Browser geöffnet werden. NodePorts werden definiert in der Webapp-Konfigurationsdatei, hier `webapp.yaml`.
 
-Die Logs überprüfen:
-kubectl get pod
-kubectl logs {NAME von Pod}
+### Logs überprüfen:
+- Zeigt die Pods an:
+  ```bash
+  kubectl get pod
+  ```
 
-HILFE:
-kubectl --help → Zeigt alle Optionen an
-kubectl get --help → Zeigt nur für “get” Optionen an
+- Überprüft die Logs eines bestimmten Pods:
+  ```bash
+  kubectl logs {Pod-Name}
+  ```
+
+### Hilfe und Optionen:
+- Allgemeine Hilfe für Kubectl:
+  ```bash
+  kubectl --help
+  ```
+
+- Hilfe für spezifische Befehle, z.B. `get`:
+  ```bash
+  kubectl get --help
+  ```
+
+```
