@@ -1,52 +1,42 @@
-### Repository for the K8s in 1 hour video
+Minikube ist nur um das Cluster zu starten oder löschen.
+Kubectl ist um das Cluster zu konfigurieren.
 
-#### K8s manifest files 
-* mongo-config.yaml
-* mongo-secret.yaml
-* mongo.yaml
-* webapp.yaml
 
-#### K8s commands
+Weil es auf meinem Linux Debian nicht funktioniert hat:
+sudo systemctl stop apparmor → Stoppt anti-virus
+minikube delete --all
+minikube start --driver=docker --force
 
-##### start Minikube and check status
-    minikube start --vm-driver=hyperkit 
-    minikube status
 
-##### get minikube node's ip address
-    minikube ip
+Minikube starten:
+minikube start --driver=docker --force
 
-##### get basic info about k8s components
-    kubectl get node
-    kubectl get pod
-    kubectl get svc
-    kubectl get all
 
-##### get extended info about components
-    kubectl get pod -o wide
-    kubectl get node -o wide
+Zeigt alle nodes an:
+kubectl get node
+kubectl node -o wide → Gibt IP-Adresse von nodes
+Zeigt alle Pods an:
+kubectl get pod
 
-##### get detailed info about a specific component
-    kubectl describe svc {svc-name}
-    kubectl describe pod {pod-name}
 
-##### get application logs
-    kubectl logs {pod-name}
-    
-##### stop your Minikube cluster
-    minikube stop
+Kubernetes File als Input um was auch immer im File ist zu erstellen:
+kubectl apply -f {Filename} (z.B. mongo-config.yaml)
 
-<br />
 
-> :warning: **Known issue - Minikube IP not accessible** 
+Erstellte Components überprüfen:
+kubectl get all → Alle überprüfen
+kubectl get configmap → Nur configMap überprüfen
+kubectl get secret → Nur secret überprüfen
 
-If you can't access the NodePort service webapp with `MinikubeIP:NodePort`, execute the following command:
-    
-    minikube service webapp-service
 
-<br />
+App auf Browser öffnen:
+kubectl get svc → Gibt einem alle laufenden Services zurück
+minikube ip → IP:nodePort (in webapp.yaml file)
 
-#### Links
-* mongodb image on Docker Hub: https://hub.docker.com/_/mongo
-* webapp image on Docker Hub: https://hub.docker.com/repository/docker/nanajanashia/k8s-demo-app
-* k8s official documentation: https://kubernetes.io/docs/home/
-* webapp code repo: https://gitlab.com/nanuchi/developing-with-docker/-/tree/feature/k8s-in-hour
+Die Logs überprüfen:
+kubectl get pod
+kubectl logs {NAME von Pod}
+
+HILFE:
+kubectl --help → Zeigt alle Optionen an
+kubectl get --help → Zeigt nur für “get” Optionen an
